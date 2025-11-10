@@ -20,4 +20,5 @@ export default defineConfig({
       },
     },
   },
+  base: "/vendor-onboarding-chatbot/",
 });
