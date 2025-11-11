@@ -1,6 +1,6 @@
 // src/App.tsx
 
-import { Chat } from "./Chat";
+import { Chat } from "./components";
 
 function App() {
   return (
