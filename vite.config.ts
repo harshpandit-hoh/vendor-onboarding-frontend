@@ -10,7 +10,6 @@ export default defineConfig({
   // bypassing the native executable that eScan is blocking.
   optimizeDeps: {
     esbuildOptions: {
-      // @ts-ignore
       target: "esnext",
       mainFields: ["module", "main"],
       resolveExtensions: [".js", ".json", ".ts"],

@@ -1,5 +1,3 @@
-// src/App.tsx
-
 import { Chat } from "./components";
 
 function App() {
