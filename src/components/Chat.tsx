@@ -4,10 +4,12 @@ import type { IMessage, IState } from "../interface";
 import { initialState, saveChat } from "../utility";
 import ChatWindow from "./ChatWindow";
 import Preview from "./Preview";
+import { useSearchParams } from "react-router-dom";
 
 export function Chat() {
   const [messages, setMessages] = useState<IMessage[]>([]);
-
+  const [searchParams] = useSearchParams();
+  const vendor_id = searchParams.get("vid") ?? "39";
   const chatEndRef = useRef<HTMLDivElement>(null);
   const [currentState, setCurrentState] = useState<IState>(initialState());
   const chatWindowRef = useRef<HTMLDivElement>(null);
@@ -20,7 +22,7 @@ export function Chat() {
   useEffect(() => {
     const startConversation = async () => {
       setIsLoading(true);
-      const initialHistory = await initiateChat();
+      const initialHistory = await initiateChat(vendor_id as string);
       setMessages(initialHistory);
       setIsLoading(false);
     };
@@ -29,7 +31,6 @@ export function Chat() {
   }, []);
 
   const handleSaveChat = useCallback(() => saveChat(chatWindowRef), []);
-
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key === "p") {

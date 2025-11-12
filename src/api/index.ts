@@ -8,9 +8,11 @@ if (!baseUrl) {
   throw new Error("VITE_API_BASE_URL is not defined in your .env file.");
 }
 
-export async function initiateChat(): Promise<IMessage[]> {
+export async function initiateChat(vendor_id: string): Promise<IMessage[]> {
   try {
-    const response = await fetch(`${baseUrl}/chat/initiate`);
+    const response = await fetch(
+      `${baseUrl}/chat/initiate?vendor_id=${vendor_id}`
+    );
     if (!response.ok) throw new Error("Network response was not ok.");
 
     const data = await response.json();
@@ -33,7 +35,8 @@ export async function initiateChat(): Promise<IMessage[]> {
 const handleSend = async (
   input: string,
   messages: IMessage[],
-  setMessages: React.Dispatch<React.SetStateAction<IMessage[]>>
+  setMessages: React.Dispatch<React.SetStateAction<IMessage[]>>,
+  vendor_id: string
 ): Promise<IState> => {
   try {
     const response = await axios.post<{
@@ -43,6 +46,7 @@ const handleSend = async (
     }>(`${baseUrl}/chat`, {
       message: input,
       conversationHistory: messages,
+      vendor_id,
     });
 
     setMessages(response.data.history);

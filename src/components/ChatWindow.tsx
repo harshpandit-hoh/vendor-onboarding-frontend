@@ -1,7 +1,8 @@
-import React, { useState, type FormEvent } from "react";
-import type { IMessage, IState } from "../interface";
 import { marked } from "marked";
+import React, { useState, type FormEvent } from "react";
+import { useSearchParams } from "react-router-dom";
 import { handleSend } from "../api";
+import type { IMessage, IState } from "../interface";
 
 function ChatWindow(props: {
   messages: IMessage[];
@@ -13,6 +14,9 @@ function ChatWindow(props: {
 }) {
   // const q1 = "How many People logged in the today?",
   //   q2 = "What were the actions taken last week?";
+  const [searchParams] = useSearchParams();
+  const vendor_id = searchParams.get("vid") ?? "39";
+
   const [input, setInput] = useState("");
   const handleSendHandler = async (e: FormEvent) => {
     e.preventDefault();
@@ -23,7 +27,7 @@ function ChatWindow(props: {
     setInput("");
     props.setIsLoading(true);
 
-    await handleSend(input, props.messages, props.setMessages)
+    await handleSend(input, props.messages, props.setMessages, vendor_id)
       .then((res) => {
         console.log(res);
         props.setCurrentState(res);
