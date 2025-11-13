@@ -57,7 +57,7 @@ function Preview(props: { currentState: IState }) {
 
   return (
     <div className="preview-panel">
-      <h2 className="preview-title">Application Status</h2>
+      <h2 className="preview-title">Profile Details</h2>
       <div className="preview-fields-container">
         {Object.entries(currentState.stages).map(([stageKey, stageValue]) => {
           const label = formatLabel(stageKey);
