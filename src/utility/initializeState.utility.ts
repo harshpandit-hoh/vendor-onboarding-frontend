@@ -14,6 +14,21 @@ const initialState = (): IState => {
         data: null,
         attempts: 0,
       },
+      GST_EXISTS: {
+        status: "pending",
+        data: null,
+        attempts: 0,
+      },
+      MSME_EXISTS: {
+        status: "pending",
+        data: null,
+        attempts: 0,
+      },
+      ESIC_PPFA_EXISTS: {
+        status: "pending",
+        data: null,
+        attempts: 0,
+      },
       ADDRESS_COUNTRY: {
         status: "pending",
         data: null,
